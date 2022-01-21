@@ -11,7 +11,7 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks {
 
 	public void OnClick_CreateRoom() {
 		if(!PhotonNetwork.IsConnected()) {
-			return
+			return;
 		}
 		RoomOptions options = new RoomOptions();
 		options.maxPlayers = 4;

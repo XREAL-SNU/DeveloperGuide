@@ -15,7 +15,7 @@ public class TestConnect : MonoBehaviourPunCallBakcs {
 	}
 	
 	public override void onConnectedToMaster() {
-		print(”Connected to Server”);
+		print("Connected to Server");
 		print(PhotonNetwork.LocalPlayer.NickName);
 	}
 
