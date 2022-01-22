@@ -1,3 +1,7 @@
+/*
+Path: /Assets/Scripts/UI/Rooms
+*/
+
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
