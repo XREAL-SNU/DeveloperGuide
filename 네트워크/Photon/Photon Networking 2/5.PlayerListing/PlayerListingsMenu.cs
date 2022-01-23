@@ -111,4 +111,11 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks {
 			_listings.RemoveAt(index);
 		}
 	}
+
+	public void OnClick_StartGame() {
+		if(PhotonNetwork.IsMasterClient) {
+			
+			PhotonNetwork.LoadLevel(1);
+		}
+	}
 }
