@@ -100,6 +100,12 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks {
 		_listings.Clear();
 	}
 
+	public override void OnMasterClientSwitched(Player newMasterClient) {
+		// Make All of the Players in the Room Leave When the Master Client Changes (Leaves)
+		// Comment this Code Out to Let Users Play Even When the Master Client Changes (Leaves)
+		_roomsCanvases.CurrentRoomCanvas.LeaveRoomMenu.OnClick_LeaveRoom();
+	}
+
 	public override void OnPlayerEnteredRoom(Player newPlayer) {
 		AddPlayerListing(newPlayer);
 	}
@@ -113,9 +119,33 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks {
 	}
 
 	public void OnClick_StartGame() {
+		// Edit this to Change Who Can Start the Game
 		if(PhotonNetwork.IsMasterClient) {
-			
+			// Edit this to Allow the Game to be Started without Everyone Selecting Ready
+			for(int i=0; i < _listings.Count; i++) {
+				if(_listings[i].Player != PhotonNetwork.LocalPlayer) {
+					if(!_listings[i].Ready) return;
+				}
+			}
+
+			PhotonNetwork.CurrentRoom.IsOpen = false;
+			PhotonNetwork.CurrentRoom.IsVisible = false;
 			PhotonNetwork.LoadLevel(1);
+		}
+	}
+
+	public void OnClick_ReadyUp() {
+		if(!PhotonNetwork.IsMasterClient) {
+			SetReadyUp(!_ready);
+			base.photonView.RPC("RPC_ChangeReadyState", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer, _ready);
+		}
+	}
+
+	[PunRPC]
+	private void RPC_ChangeReadyState(Player player, bool ready) {
+		int index = _listings.FindIndex(x => x.Player == player);
+		if(index != -1) {
+			_listings[index].Ready = ready;
 		}
 	}
 }
