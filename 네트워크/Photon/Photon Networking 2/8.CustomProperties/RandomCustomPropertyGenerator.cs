@@ -19,7 +19,7 @@ public class RandomCustomPropertyGenerator : MonoBehaviour {
 
         _properties["RandomNumber"] = result;
         // _properties.Remove("RandomNumber");
-        PhotonNetwork.LocalPlayer.SetCustomProperties(_properties);
+        PhotonNetwork.SetPlayerCustomProperties(_properties);
         // PhotonNetwork.LocalPlayer.CustomProperties = _properties;
     }
 
