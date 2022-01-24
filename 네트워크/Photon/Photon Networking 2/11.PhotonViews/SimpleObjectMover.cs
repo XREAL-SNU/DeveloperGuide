@@ -34,7 +34,7 @@ public class SimpleObjectMover : MonoBehaviourPun, IPunObservable {
 
             transform.position += (new Vector3(x, y, 0f) * _moveSpeed);
 
-            UpdateMovingBoolean((x != 0f || y != of));
+            UpdateMovingBoolean((x != 0f || y != 0f));
         }
     }
 
