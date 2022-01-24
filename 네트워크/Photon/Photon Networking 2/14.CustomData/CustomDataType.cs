@@ -35,12 +35,12 @@ public class CustomDataTypes : MonoBehaviourPunCallbacks {
 
     [PunRPC]
     private void RPC_TypedReceiveMyCustomSerialization(MyCustomSerialization datas) {
-        PlayerListing("Receive Type: " + datas.MyNumber + ", " + datas.MyString);
+        Print("Receive Type: " + datas.MyNumber + ", " + datas.MyString);
     }
 
     [PunRPC]
     private void RPC_ReceiveMyCustomSerialization(byte[] datas) {
         MyCustomSerialization data = MyCustomSerialization.Deserialize(datas);
-        PlayerListing("Receive Type: " + result.MyNumber + ", " + result.MyString);
+        Print("Receive Type: " + result.MyNumber + ", " + result.MyString);
     }
 }
